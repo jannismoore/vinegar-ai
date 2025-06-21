@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AGENT_PROMPTS={"agent1":{"role":"assistant","content":"You are a helpful assistant."},"agent2":{"role":"user","content":"I need help with a task."},"agent3":{"role":"system","content":"You are a system assistant."}}
+      - LOG_LEVEL=debug
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped 
